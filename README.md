@@ -1,21 +1,30 @@
 # Mon vieux Grimoire
 
-This API developed in NodeJS and MongoDB allows you to:
+Cette API est développée avec **Node.js** et **MongoDB**.  
+Elle permet de :
 
-- View books entered in the database
-- View a particular book
-- View the three books with the best average rating
-- Create users
-- Allow users to log in
-- Create a new book as a user
-- Edit a book as a user
-- Delete a book as a user
-- Vote for a book as a user.
+- Consulter tous les livres présents dans la base de données
+- Consulter un livre précis par son ID
+- Consulter les 3 livres avec la meilleure note moyenne
+- Créer des utilisateurs
+- Permettre aux utilisateurs de se connecter
+- Créer un livre (authentification requise)
+- Modifier un livre (authentification requise)
+- Supprimer un livre (authentification requise)
+- Noter un livre (authentification requise)
 
-## Launch the project
+---
 
-### With npm
+## Lancer le projet
 
-Run the command `npm run server` to launch the backend on port 4000.
+### Avec npm
 
-Make sure to launch the front-end on port 3000, which is the only one configured to be accepted by CORS.
+1️⃣ Ouvrir un terminal à la racine du projet et exécuter :
+
+Cela démarre le serveur backend sur le **port 4000**.
+
+2️⃣ Le front-end doit être lancé sur le **port 3000**, car seul ce port est autorisé via le CORS.
+
+- Backend = API qui gère les livres et les utilisateurs  
+- Frontend = interface visible par l’utilisateur  
+- CORS = sécurité qui permet au front-end de communiquer avec le backend uniquement depuis le port autorisé

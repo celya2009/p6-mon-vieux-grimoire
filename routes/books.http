@@ -1,0 +1,48 @@
+### Récupérer tous les livres
+GET http://localhost:4000/api/books
+
+### Récupérer les meilleurs livres
+GET http://localhost:4000/api/books/bestrating
+
+### Récupérer un livre précis (remplace ID_DU_LIVRE par un vrai ID de ta base)
+GET http://localhost:4000/api/books/ID_DU_LIVRE
+
+
+### Ajouter un livre (protégé : token requis)
+POST http://localhost:4000/api/books
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "title": "Le vieux grimoire secret",
+  "author": "Auteur Mystère",
+  "year": 2025,
+  "description": "Un livre magique..."
+}
+
+
+### Modifier un livre (protégé : token requis)
+PUT http://localhost:4000/api/books/ID_DU_LIVRE
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "title": "Titre modifié",
+  "author": "Auteur modifié",
+  "year": 2026
+}
+
+
+### Supprimer un livre (protégé : token requis)
+DELETE http://localhost:4000/api/books/ID_DU_LIVRE
+Authorization: Bearer {token}
+
+
+### Noter un livre (protégé : token requis)
+POST http://localhost:4000/api/books/ID_DU_LIVRE/rating
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "grade": 5
+}

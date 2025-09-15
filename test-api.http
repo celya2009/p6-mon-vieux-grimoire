@@ -1,0 +1,18 @@
+
+
+
+POST http://localhost:4000/api/books
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJhOGUzOWRiMjQwMTRkM2E0Y2ZmNGEiLCJpYXQiOjE3NTc4OTc5NDYsImV4cCI6MTc1Nzk4NDM0Nn0.RqCmfF5-rzyrPx1MF49JowpOO3tjVVmMzKYKCl5UjTw
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="book"
+
+{"title":"Mon livre test","author":"Moi","year":2025,"genre":"Fiction"}
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="monlivre.png"
+Content-Type: image/png
+
+< ./images/Book_for_Esther.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+

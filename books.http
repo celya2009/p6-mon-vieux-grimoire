@@ -1,0 +1,58 @@
+# ------------------- Variables globales -------------------
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJhOGUzOWRiMjQwMTRkM2E0Y2ZmNGEiLCJpYXQiOjE3NTc4OTc5NDYsImV4cCI6MTc1Nzk4NDM0Nn0.RqCmfF5-rzyrPx1MF49JowpOO3tjVVmMzKYKCl5UjTw
+@baseUrl = http://localhost:4000/api/books
+
+### ------------------- GET : tous les livres -------------------
+GET {{baseUrl}}
+Content-Type: application/json
+
+### ------------------- GET : livre par ID -------------------
+# Remplace ID_DU_LIVRE par l'ID réel du livre
+GET {{baseUrl}}/ID_DU_LIVRE
+Content-Type: application/json
+
+### ------------------- GET : meilleurs livres -------------------
+GET {{baseUrl}}/bestrating
+Content-Type: application/json
+
+### ------------------- POST : créer un livre -------------------
+POST {{baseUrl}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Mon nouveau livre",
+  "author": "Moi",
+  "year": 2025,
+  "genre": "Fiction"
+}
+
+### ------------------- PUT : modifier un livre -------------------
+# Remplace ID_DU_LIVRE par l'ID du livre à modifier
+PUT {{baseUrl}}/ID_DU_LIVRE
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Titre modifié",
+  "author": "Moi",
+  "year": 2025,
+  "genre": "Fiction"
+}
+
+### ------------------- DELETE : supprimer un livre -------------------
+# Remplace ID_DU_LIVRE par l'ID du livre à supprimer
+DELETE {{baseUrl}}/ID_DU_LIVRE
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### ------------------- POST : ajouter une note -------------------
+# Remplace ID_DU_LIVRE par l'ID du livre à noter
+POST {{baseUrl}}/ID_DU_LIVRE/rating
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "userId": "TON_USER_ID",
+  "rating": 5
+}

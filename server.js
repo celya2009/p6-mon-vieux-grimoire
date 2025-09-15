@@ -1,38 +1,25 @@
-const express = require("express");
-const connectDB = require("./config/db");
-require("dotenv").config({ path: ".env" });
-const cors = require("cors");
+// ------------------- Fichier : server.js -------------------
+// Objectif : démarrer le serveur Node.js qui écoute les requêtes HTTP
 
-// connexion à la DB
-connectDB();
+const app = require("./app"); // 1️⃣ On importe l'application Express configurée (routes, middlewares, etc.)
 
-const app = express();
+// 2️⃣ Définition du port sur lequel le serveur va écouter
+// On prend soit la variable d'environnement PORT, soit 4000 par défaut
+const PORT = process.env.PORT || 4000;
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-    optionsSuccessStatus: 200,
-  })
-);
+// 3️⃣ Lancement du serveur
+app.listen(PORT, () => {
+  // Quand le serveur démarre correctement, on affiche ce message
+  console.log(`Le serveur a démarré sur le port ${PORT}`);
+})
+// 4️⃣ Gestion des erreurs lors du démarrage du serveur
+.on("error", (err) => {
+  if (err.code === "EADDRINUSE") {
+    // Si le port est déjà utilisé par une autre application
+    console.log(`Erreur : le port ${PORT} est déjà utilisé.`);
+  } else {
+    // Autres erreurs possibles
+    console.log(err);
+  }
+});
 
-// Middleware pour traiter les données de la Request
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use("/images", express.static("./images"));
-
-app.use("/api/books", require("./routes/books.routes"));
-app.use("/api/auth", require("./routes/auth.routes"));
-
-// Port depuis .env ou 4000 par défaut
-const port = process.env.PORT || 4000;
-
-// Lancer le serveur avec gestion d'erreur si le port est occupé
-app.listen(port, () => console.log(`Le serveur a démarré au port ${port}`))
-   .on("error", (err) => {
-       if (err.code === "EADDRINUSE") {
-           console.log(`Erreur : le port ${port} est déjà utilisé. Vérifie qu'aucun autre serveur Node n'est lancé.`);
-       } else {
-           console.log(err);
-       }
-   });

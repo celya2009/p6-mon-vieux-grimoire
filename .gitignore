@@ -1,24 +1,32 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ------------------- Explications -------------------
 
-# dependencies
-/node_modules
-/.pnp
+# Dépendances Node.js (ne pas versionner les modules installés)
+node_modules
+
+# PnP (Plug’n’Play Yarn)
+.pnp
 .pnp.js
-/.idea
-# testing
-/coverage
 
-# production
-/build
+# IDEs (par ex. WebStorm / IntelliJ)
+.idea
 
-# misc
+# Tests
+coverage
+
+# Dossier de production généré
+build
+
+# Fichiers système
 .DS_Store
+
+# Variables d'environnement (très sensibles !)
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-.env
 
+# Logs npm / yarn
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

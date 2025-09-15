@@ -1,29 +1,57 @@
-// Import necessary modules
+// ------------------- Modules -------------------
 const express = require("express");
-const router = express.Router();
+const router = express.Router();  // Création d'un routeur Express
 
-// Import middleware
-const auth = require("../middleware/auth");
-const multer = require("../middleware/multer-config");
+// ------------------- Middlewares -------------------
+const auth = require("../middleware/auth");                 // Vérifie que l'utilisateur est authentifié
+const multer = require("../middleware/multer-config");      // Gère l'upload d'une image
+const sharpConfig = require("../middleware/sharp-config");  // Optimise et compresse l'image
 
-// Import controller
-const Books = require("../controllers/books.controller");
+// ------------------- Contrôleur -------------------
+const BooksController = require("../controllers/books.controller"); // Gestion des livres
 
-// Routes
-// Get all books
-router.get("/", Books.getBooks);
-// Get best rated books
-router.get("/bestrating", Books.getBestRating);
-// Get a specific book by ID
-router.get("/:id", Books.getOneBook);
-// Add a new book
-router.post("/", auth, multer, Books.setBooks);
-// Edit an existing book
-router.put("/:id", auth, multer, Books.editBook);
-// Delete a book by ID
-router.delete("/:id", auth, Books.deleteBook);
-// Add a rating for a book by ID
-router.post("/:id/rating", auth, Books.setRating);
+// ------------------- Routes -------------------
 
-// Export router
+// 1️⃣ Récupérer tous les livres
+// GET /api/books
+router.get("/", BooksController.getBooks);
+
+// 2️⃣ Récupérer les 3 livres les mieux notés
+// GET /api/books/bestrating
+router.get("/bestrating", BooksController.getBestRating);
+
+// 3️⃣ Récupérer un livre précis par son ID
+// GET /api/books/:id
+router.get("/:id", BooksController.getOneBook);
+
+// 4️⃣ Ajouter un nouveau livre
+// Authentification obligatoire, upload image, optimisation image
+// POST /api/books
+router.post(
+  "/",
+  auth,
+  multer,       // Upload d'une seule image avec le champ "image"
+  sharpConfig,  // Optimisation de l'image uploadée
+  BooksController.setBooks
+);
+
+// 5️⃣ Modifier un livre existant
+// PUT /api/books/:id
+router.put(
+  "/:id",
+  auth,
+  multer,       // Upload image si l'utilisateur veut changer l'image
+  sharpConfig,  // Optimisation de la nouvelle image
+  BooksController.editBook
+);
+
+// 6️⃣ Supprimer un livre
+// DELETE /api/books/:id
+router.delete("/:id", auth, BooksController.deleteBook);
+
+// 7️⃣ Ajouter une note à un livre
+// POST /api/books/:id/rating
+router.post("/:id/rating", auth, BooksController.setRating);
+
+// ------------------- Export -------------------
 module.exports = router;

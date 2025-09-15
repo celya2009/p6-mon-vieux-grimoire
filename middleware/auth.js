@@ -1,22 +1,32 @@
-require("dotenv").config({ path: ".env" });
-const jwt = require("jsonwebtoken");
+// =================== Fichier : auth.middleware.js ===================
+// Fonction principale : authentifier les utilisateurs via JWT
+// But : Vérifier que l'utilisateur est connecté avant de lui permettre d'accéder à certaines routes
 
-// Middleware to authenticate requests using JWT token
+require("dotenv").config({ path: ".env" }); // Charge les variables d'environnement
+const jwt = require("jsonwebtoken");        // Module pour manipuler les JWT
+
+// Middleware pour authentifier les requêtes
 module.exports = (req, res, next) => {
   try {
-    // Extract the token from the Authorization header
+    // 1️⃣ Récupère le token depuis l'en-tête Authorization (format : "Bearer TOKEN")
     const token = req.headers.authorization.split(" ")[1];
-    // Verify the token with the secret key and get the decoded token object
+
+    // 2️⃣ Vérifie le token avec la clé secrète et décode le contenu
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    // Extract the user ID from the decoded token and store it in the request object for later use
+
+    // 3️⃣ Récupère l'ID de l'utilisateur depuis le token décodé
     const userId = decodedToken.userId;
+
+    // 4️⃣ Ajoute l'ID de l'utilisateur à l'objet request pour que les contrôleurs puissent l'utiliser
     req.auth = {
       userId: userId,
     };
-    // Move on to the next middleware
+
+    // 5️⃣ Passe au middleware suivant ou au contrôleur
     next();
   } catch (error) {
-    // If there's an error, return a 401 Unauthorized status with the error message
+    // En cas d'erreur (token absent ou invalide), renvoie un statut 401 Unauthorized
     res.status(401).json({ error });
   }
 };
+
