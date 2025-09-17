@@ -99,3 +99,4 @@ const login = (req, res, next) => {
 
 // ------------------- Export -------------------
 module.exports = { register, login };
+
