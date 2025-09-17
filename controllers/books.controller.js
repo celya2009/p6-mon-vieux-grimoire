@@ -4,6 +4,7 @@
 // Utilité : Permet de gérer la bibliothèque de l'application et les notes des utilisateurs
 
 // ------------------- Modules -------------------
+const { hash } = require("crypto");
 const Book = require("../models/books.model"); // Modèle Mongoose pour les livres
 const fs = require("fs");                      // Pour manipuler les fichiers (ex: supprimer une image)
 
