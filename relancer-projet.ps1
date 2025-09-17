@@ -20,3 +20,4 @@ Write-Host "🌐 Lancement du frontend React..."
 Start-Process powershell -ArgumentList "cd 'C:\Users\souss\Documents\p6-mon-vieux-grimoire'; npm start"
 
 Write-Host "✅ Tout est lancé !"
+

@@ -36,3 +36,4 @@ const storage = multer.diskStorage({
 // Ce middleware sera utilisé dans les routes pour gérer l'upload des images
 module.exports = multer({ storage: storage }).single("image");
 
+
