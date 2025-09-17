@@ -28,3 +28,4 @@ Cela démarre le serveur backend sur le **port 4000**.
 - Backend = API qui gère les livres et les utilisateurs  
 - Frontend = interface visible par l’utilisateur  
 - CORS = sécurité qui permet au front-end de communiquer avec le backend uniquement depuis le port autorisé
+
